@@ -1,0 +1,55 @@
+scalar BigDecimal
+scalar YearMonth
+
+type Pizza {
+  id: ID!
+  name: String!
+  toppings: [Topping!]!
+  priceCents: BigDecimal!
+  yearMonth: YearMonth!
+}
+
+type Topping {
+  id: ID!
+  name: String!
+  priceCents: BigDecimal!
+}
+
+input CreatePizza {
+  name: String!
+  toppingsIds: [ID!]!
+}
+
+input UpdatePizza {
+  id: ID!
+  name: String
+  toppingsIds: [ID!]
+}
+
+input CreateTopping {
+  name: String!
+  priceCents: BigDecimal!
+}
+
+input UpdateTopping {
+  id: ID!
+  name: String
+  priceCents: BigDecimal
+}
+
+type Query {
+  pizzas: [Pizza!]!
+
+  toppings: [Topping!]
+  topping: Topping
+}
+
+type Mutation {
+  createPizza(input: CreatePizza!): Pizza!
+  updatePizza(input: UpdatePizza!): Pizza
+  deletePizza(input: ID!): ID
+
+  createTopping(input: CreateTopping!): Topping!
+  updateTopping(input: UpdateTopping!): Topping
+  deleteTopping(input: ID!): ID
+}
